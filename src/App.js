@@ -1,56 +1,52 @@
 import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom';
+import * as ReadableAPI from './utils/ReadableAPI';
+import PostList from './posts/PostList';
+import CategoryList from './categories/CategoryList';
+import AddPost from './posts/addPost';
 import './App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      backend: 'backend-data'
-    }
+  state = {
+    posts: []
   }
 
   componentDidMount() {
-    const url = `${process.env.REACT_APP_BACKEND}/categories`;
-    console.log('fetching from url', url);
-    fetch(url, { headers: { 'Authorization': 'whatever-you-want' } } )
-      .then( (res) => { return(res.text()) })
-      .then((data) => {
-        this.setState({backend:data});
-      });
+    ReadableAPI.getAllPosts().then((posts) => {
+      this.setState({ posts });
+      console.log(this.state.posts);
+    });
   }
 
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <header>
-          <h1>Readable</h1>
+          <h1><Link to="/">Readable</Link></h1>
         </header>
 
-        <aside className="categories">
-          <ul>
-            <li><a href="#">React</a></li>
-            <li><a href="#">Redux</a></li>
-            <li><a href="#">Udacity</a></li>
-          </ul>
-        </aside>
-        
-        <section className="posts">
-          <ul className="post-list">
-            <li className="post">
-              <span className="post-score">5</span>
-              <h4><a href="#">React</a></h4>
-              <h3><a href="#">5 Reasons Why React is the Best JS Framework</a></h3>
-              <div className="post-meta">
-                <span className="post-author">Brian Phillips</span> · <span className="post-comment-count">5 Comments</span>
+        <main className="container">
+          <Route path="/add-post" render={() => (
+            <AddPost/>
+          )}/>
+          <Route exact path="/" render={() => (
+            <div className="content">
+              <aside className="categories">
+                <CategoryList/>
+              </aside>
+              
+              <div className="posts">
+                <PostList
+                  posts={this.state.posts}
+                />
               </div>
-            </li>
-          </ul>
-        </section>
 
-        <p>
-          Categories: <br/>
-          {this.state.backend}
-        </p>
+              <div className="open-search">
+                <Link to="/add-post">Add a book</Link>
+              </div>
+            </div>
+          )}/>
+        </main>
       </div>
     );
   }
