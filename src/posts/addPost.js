@@ -6,6 +6,10 @@ class AddPost extends React.Component {
     searchResults: []
   }
 
+  addPost = (id, title, body, author, category) => {
+
+  }
+
   render() {
     return (
       <div className="add-post">

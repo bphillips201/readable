@@ -1,24 +1,24 @@
+import './App.css';
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import * as ReadableAPI from './utils/ReadableAPI';
 import PostList from './posts/PostList';
 import CategoryList from './categories/CategoryList';
 import AddPost from './posts/addPost';
-import './App.css';
+import { addPost, getPosts } from './posts/actions';
+import { connect } from 'react-redux';
 
 class App extends Component {
-  state = {
-    posts: []
-  }
+  state = {}
 
   componentDidMount() {
     ReadableAPI.getAllPosts().then((posts) => {
-      this.setState({ posts });
-      console.log(this.state.posts);
+      this.props.getAllPosts({ posts })
     });
   }
 
   render() {
+
     return (
       <div className="app">
         <header>
@@ -27,7 +27,8 @@ class App extends Component {
 
         <main className="container">
           <Route path="/add-post" render={() => (
-            <AddPost/>
+            <AddPost
+            />
           )}/>
           <Route exact path="/" render={() => (
             <div className="content">
@@ -37,7 +38,7 @@ class App extends Component {
               
               <div className="posts">
                 <PostList
-                  posts={this.state.posts}
+                  posts={this.props.posts}
                 />
               </div>
 
@@ -52,4 +53,20 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps ({ posts }) {
+  return {
+    posts
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    getAllPosts: (data) => dispatch(getPosts(data)),
+    submitPost: (data) => dispatch(addPost(data))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
