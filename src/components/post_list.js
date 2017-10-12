@@ -15,7 +15,7 @@ class PostList extends React.Component {
               <span className="post-ranking-value">{post.voteScore}</span>
               <button><FaCaretDown/></button>
             </div>
-            <h4><Link to='#'>{capitalize(post.category)}</Link></h4>
+            <h4><Link to={`/${post.category}`}>{capitalize(post.category)}</Link></h4>
             <h3><Link to={`/${post.category}/${post.id}`}>{post.title}</Link></h3>
             <div className="post-meta">
               <span className="post-author">{post.author}</span>

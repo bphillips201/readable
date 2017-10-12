@@ -1,6 +1,7 @@
 import React from 'react';
 import * as ReadableAPI from '../utils/ReadableAPI';
 import CommentList from '../components/comment_list';
+import AddComment from '../views/add_comment';
 
 class Post extends React.Component {
   state = {
@@ -26,6 +27,7 @@ class Post extends React.Component {
         
         <p>{post.body}</p>
 
+        <AddComment/>
         <CommentList postId={this.props.match.params.id}/>
       </div>
     )
