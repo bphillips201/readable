@@ -31,6 +31,8 @@ class AddPost extends React.Component {
 
           <label htmlFor="add-post-body">Body</label><br/>
           <textarea id="add-post-body"/><br/>
+
+          <button>Add Post</button>
         </form>
       </div>
     )

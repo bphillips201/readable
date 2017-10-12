@@ -89,6 +89,6 @@ export const getCategoryPosts = (category) =>
 
 // COMMENTS
 export const getPostComments = (postId) =>
-fetch(`${api}/posts/${postId}`, { headers })
+fetch(`${api}/posts/${postId}/comments`, { headers })
   .then(res => res.json())
   .then(data => data)
