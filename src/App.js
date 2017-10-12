@@ -1,12 +1,13 @@
-import './App.css';
+import './styles/App.css';
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
-import * as ReadableAPI from './utils/ReadableAPI';
-import PostList from './posts/PostList';
-import CategoryList from './categories/CategoryList';
-import AddPost from './posts/addPost';
-import { addPost, getPosts } from './posts/actions';
+import { withRouter, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as ReadableAPI from './utils/ReadableAPI';
+import PostList from './components/post_list';
+import CategoryList from './components/category_list';
+import AddPost from './views/add_post';
+import Post from './views/post';
+import { addPost, getPosts } from './actions/post_actions';
 
 class App extends Component {
   state = {}
@@ -26,10 +27,8 @@ class App extends Component {
         </header>
 
         <main className="container">
-          <Route path="/add-post" render={() => (
-            <AddPost
-            />
-          )}/>
+          <Route path="/post/:id" component={Post}/>
+          <Route path="/add-post" component={AddPost}/>
           <Route exact path="/" render={() => (
             <div className="content">
               <aside className="categories">
@@ -43,7 +42,7 @@ class App extends Component {
               </div>
 
               <div className="open-search">
-                <Link to="/add-post">Add a book</Link>
+                <Link to="/add-post">Add New Post</Link>
               </div>
             </div>
           )}/>
@@ -53,6 +52,7 @@ class App extends Component {
   }
 }
 
+// TODO: convert this into an array of posts
 function mapStateToProps ({ posts }) {
   return {
     posts
@@ -66,7 +66,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(App));

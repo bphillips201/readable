@@ -6,7 +6,7 @@ import {
   DELETE_POST,
   VOTE_UP_POST,
   VOTE_DOWN_POST
-} from '../posts/actions';
+} from '../actions/post_actions';
 
 function posts (state = [], action) {
   switch (action.type) {
