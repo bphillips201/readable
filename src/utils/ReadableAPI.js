@@ -21,6 +21,21 @@ export const getAllPosts = () =>
     .then(res => res.json())
     .then(data => data)
 
+export const addPost = (id, timestamp, title, body, author, category) =>
+  fetch(`${api}/posts/`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    id: JSON.stringify({ id }),
+    timestamp: JSON.stringify({ timestamp }),
+    title: JSON.stringify({ title }),
+    body: JSON.stringify({ body }),
+    author: JSON.stringify({ author }),
+    category: JSON.stringify({ category }),
+  }).then(res => res.json())
+
 export const updatePost = (post, body, title) =>
   fetch(`${api}/posts/${post.id}`, {
     method: 'PUT',
@@ -62,13 +77,18 @@ export const downvotePost = (post) =>
   }).then(res => res.json())
 
 // CATEGORIES
-export const search = (query, maxResults) =>
-  fetch(`${api}/search`, {
-    method: 'POST',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ query, maxResults })
-  }).then(res => res.json())
-    .then(data => data.books)
+export const getAllCategories = () =>
+fetch(`${api}/categories`, { headers })
+  .then(res => res.json())
+  .then(data => data)
+
+export const getCategoryPosts = (category) =>
+  fetch(`${api}/${category}/posts`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
+// COMMENTS
+export const getPostComments = (postId) =>
+fetch(`${api}/posts/${postId}`, { headers })
+  .then(res => res.json())
+  .then(data => data)

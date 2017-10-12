@@ -1,4 +1,4 @@
-import './styles/App.css';
+import './styles/app.css';
 import React, { Component } from 'react';
 import { withRouter, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -7,11 +7,10 @@ import PostList from './components/post_list';
 import CategoryList from './components/category_list';
 import AddPost from './views/add_post';
 import Post from './views/post';
+import Category from './views/category'
 import { addPost, getPosts } from './actions/post_actions';
 
 class App extends Component {
-  state = {}
-
   componentDidMount() {
     ReadableAPI.getAllPosts().then((posts) => {
       this.props.getAllPosts({ posts })
@@ -27,7 +26,8 @@ class App extends Component {
         </header>
 
         <main className="container">
-          <Route path="/post/:id" component={Post}/>
+          <Route path="/:category/:id" component={Post}/>
+          <Route exact path="/:category" component={Category}/>
           <Route path="/add-post" component={AddPost}/>
           <Route exact path="/" render={() => (
             <div className="content">
