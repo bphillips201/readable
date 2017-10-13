@@ -22,18 +22,20 @@ export const getAllPosts = () =>
     .then(data => data)
 
 export const addPost = (id, timestamp, title, body, author, category) =>
-  fetch(`${api}/posts/`, {
+  fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    id: JSON.stringify({ id }),
-    timestamp: JSON.stringify({ timestamp }),
-    title: JSON.stringify({ title }),
-    body: JSON.stringify({ body }),
-    author: JSON.stringify({ author }),
-    category: JSON.stringify({ category }),
+    body: JSON.stringify({
+      id: id,
+      timestamp: timestamp,
+      title: title,
+      body: body,
+      author: author,
+      category: category
+    })
   }).then(res => res.json())
 
 export const updatePost = (post, body, title) =>
@@ -43,8 +45,10 @@ export const updatePost = (post, body, title) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    title: JSON.stringify({ title }),
-    body: JSON.stringify({ body })
+    body: JSON.stringify({
+      title: title,
+      body: body
+    })
   }).then(res => res.json())
 
 export const deletePost = (post) =>
@@ -63,7 +67,9 @@ export const upvotePost = (post) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    option: "upVote"
+    body: JSON.stringify({
+      option: "upVote"
+    })
   }).then(res => res.json())
 
 export const downvotePost = (post) =>
@@ -73,7 +79,9 @@ export const downvotePost = (post) =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    option: "downVote"
+    body: JSON.stringify({
+      option: "downVote"
+    })
   }).then(res => res.json())
 
 // CATEGORIES
@@ -92,3 +100,19 @@ export const getPostComments = (postId) =>
 fetch(`${api}/posts/${postId}/comments`, { headers })
   .then(res => res.json())
   .then(data => data)
+
+export const addComment = (id, timestamp, body, author, parentId) =>
+  fetch(`${api}/comments`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id: id,
+      timestamp: timestamp,
+      body: body,
+      author: author,
+      parentId: parentId
+    })
+  }).then(res => res.json())

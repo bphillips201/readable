@@ -27,7 +27,7 @@ class Post extends React.Component {
         
         <p>{post.body}</p>
 
-        <AddComment/>
+        <AddComment postId={this.props.match.params.id}/>
         <CommentList postId={this.props.match.params.id}/>
       </div>
     )
