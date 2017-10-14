@@ -8,12 +8,12 @@ import CategoryList from './components/category_list';
 import AddPost from './views/add_post';
 import Post from './views/post';
 import Category from './views/category'
-import { addPost, getPosts } from './actions/post_actions';
+import { getPosts } from './actions/post_actions';
 
 class App extends Component {
   componentDidMount() {
     ReadableAPI.getAllPosts().then((posts) => {
-      this.props.getAllPosts({ posts })
+      this.props.dispatch(getPosts({posts}))
     });
   }
 
@@ -59,14 +59,6 @@ function mapStateToProps ({ posts }) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    getAllPosts: (data) => dispatch(getPosts(data)),
-    submitPost: (data) => dispatch(addPost(data))
-  }
-}
-
 export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(App));

@@ -2,31 +2,28 @@ import React from 'react';
 import * as ReadableAPI from '../utils/ReadableAPI';
 import { capitalize } from '../utils/helpers';
 import shortid from 'shortid';
+import { connect } from 'react-redux';
+import { addPost } from '../actions/post_actions';
+import serializeForm from 'form-serialize';
 
 class AddPost extends React.Component {
   state = {
-    title: '',
-    author: '',
-    category: '',
-    body: '',
     categories: []
   }
 
-  addPost = (title, body, author, category) => {
+  submitPost = (e) => {
+    e.preventDefault();
+    const values = serializeForm(e.target, { hash: true });
     const id = shortid.generate();
     const timestamp = Date.now();
+    const { title, author, category, body } = values;
 
     ReadableAPI
       .addPost(id, timestamp, title, body, author, category)
       .then((data) => {
-        console.log(data);
+        this.props.dispatch(addPost({data}));
       });
   }
-
-  updateTitle = (title) => { this.setState({ title }); }
-  updateAuthor = (author) => { this.setState({ author }); }
-  updateCategory = (category) => { this.setState({ category }) }
-  updateBody = (body) => { this.setState({ body }); }
 
   componentDidMount() {
     ReadableAPI.getAllCategories().then((data) => {
@@ -37,40 +34,30 @@ class AddPost extends React.Component {
   render() {
     return (
       <div className="add-post">
-        <form>
+        <form onSubmit={this.submitPost}>
           <h3>Add a New Post</h3>
 
           <label htmlFor="add-post-title">Title</label><br/>
-          <input value={this.state.title} id="add-post-title" type="text" onChange={(event) => this.updateTitle(event.target.value)}/><br/>
+          <input name="title" id="add-post-title" type="text"/><br/>
 
           <label htmlFor="add-post-author">Author</label><br/>
-          <input value={this.state.author} id="add-post-author" type="text" onChange={(event) => this.updateAuthor(event.target.value)}/><br/>
+          <input name="author" id="add-post-author" type="text"/><br/>
 
           <label htmlFor="add-post-category">Category</label><br/>
-          <select value={this.state.category} onChange={(event) => this.updateCategory(event.target.value)} id="add-post-category">
+          <select name="category" id="add-post-category">
             {this.state.categories.map((cat) => (
               <option value={cat.name} key={cat.name}>{capitalize(cat.name)}</option>
             ))}
           </select><br/>
 
           <label htmlFor="add-post-body">Body</label><br/>
-          <textarea id="add-post-body" onChange={(event) => this.updateBody(event.target.value)}/><br/>
+          <textarea name="body" id="add-post-body"/><br/>
 
-          <button
-            type="button"
-            onClick={() => this.addPost(
-              this.state.title,
-              this.state.body,
-              this.state.author,
-              this.state.category
-            )}
-          >
-            Add Post
-          </button>
+          <button>Add Post</button>
         </form>
       </div>
     )
   }
 }
 
-export default AddPost;
+export default connect(null)(AddPost);

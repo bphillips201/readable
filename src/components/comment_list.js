@@ -2,6 +2,8 @@ import React from 'react';
 import FaCaretUp from 'react-icons/lib/fa/caret-up';
 import FaCaretDown from 'react-icons/lib/fa/caret-down';
 import * as ReadableAPI from '../utils/ReadableAPI';
+import { getComments } from '../actions/comment_actions';
+import { connect } from 'react-redux';
 
 class CommentList extends React.Component {
   state = {
@@ -10,12 +12,13 @@ class CommentList extends React.Component {
   
   componentDidMount() {
     ReadableAPI.getPostComments(this.props.postId).then((comments) => {
-      this.setState({comments});
+      this.props.dispatch(getComments({comments}))
     });
   }
 
   render() {
-    const { comments } = this.state;
+    const { comments } = this.props;
+    console.log(this.props);
 
     return(
       <ul className="comment-list">
@@ -38,4 +41,11 @@ class CommentList extends React.Component {
   }
 }
 
-export default CommentList;
+// TODO: convert this into an array of posts
+function mapStateToProps ({ comments }) {
+  return {
+    comments
+  }
+}
+
+export default connect(mapStateToProps)(CommentList);

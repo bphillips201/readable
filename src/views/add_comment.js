@@ -1,6 +1,9 @@
 import React from 'react';
 import * as ReadableAPI from '../utils/ReadableAPI';
 import shortid from 'shortid';
+import { connect } from 'react-redux';
+import { addComment } from '../actions/comment_actions';
+import serializeForm from 'form-serialize';
 
 class AddComment extends React.Component {
   state = {
@@ -8,15 +11,18 @@ class AddComment extends React.Component {
     body: ''
   }
 
-  addComment = (body, author) => {
+  submitComment = (e) => {
+    e.preventDefault();
+    const values = serializeForm(e.target, { hash: true });
     const id = shortid.generate();
     const timestamp = Date.now();
     const parentId = this.props.postId;
+    const { author, body } = values;
 
     ReadableAPI
       .addComment(id, timestamp, body, author, parentId)
       .then((data) => {
-        console.log(data);
+        this.props.dispatch(addComment({data}));
       });
   }
 
@@ -26,28 +32,20 @@ class AddComment extends React.Component {
   render() {
     return (
       <div className="add-comment">
-        <form>
+        <form onSubmit={this.submitComment}>
           <h3>Add a New Comment</h3>
 
           <label htmlFor="add-comment-author">Name</label><br/>
-          <input id="add-comment-author" type="text" onChange={(event) => this.updateAuthor(event.target.value)} /><br/>
+          <input name="author" id="add-comment-author" type="text"/><br/>
 
           <label htmlFor="add-comment-body">Comment</label><br/>
-          <textarea id="add-comment-body" onChange={(event) => this.updateBody(event.target.value)}/><br/>
+          <textarea name="body" id="add-comment-body"/><br/>
 
-          <button
-            type="button"
-            onClick={() => this.addComment(
-              this.state.body,
-              this.state.author
-            )}
-          >
-            Add Comment
-          </button>
+          <button>Add Comment</button>
         </form>
       </div>
     )
   }
 }
 
-export default AddComment;
+export default connect(null)(AddComment);

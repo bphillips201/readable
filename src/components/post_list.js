@@ -8,7 +8,7 @@ class PostList extends React.Component {
   render() {
     return(
       <ul className="post-list">
-        {this.props.posts.map((post) => (
+        {this.props.posts.sort((a, b) => a.voteScore < b.voteScore).map((post) => (
           <li key={post.id} className="post">
             <div className="post-ranking">
               <button><FaCaretUp/></button>

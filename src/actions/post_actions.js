@@ -12,14 +12,9 @@ export function getPosts ({ posts }) {
   }
 }
 
-export function addPost ({ id, title, body, author, category }) {
+export function addPost ({ data }) {
   return {
     type: ADD_POST,
-    id,
-    title,
-    body,
-    author,
-    category,
-    timestamp: Date.Now()
+    data
   }
 }
