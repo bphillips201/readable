@@ -29,22 +29,26 @@ class CommentList extends React.Component {
     console.log(this.props);
 
     return(
-      <ul className="comment-list">
-        {comments.sort((a, b) => a.voteScore < b.voteScore).map((comment) => (
-          <li className="comment" key={comment.id}>
-            <div className="comment-ranking">
-              <button onClick={() => this.voteComment(comment.id, 'upVote')}><FaCaretUp/></button>
-              <span className="comment-ranking-value">{comment.voteScore}</span>
-              <button onClick={() => this.voteComment(comment.id, 'downVote')}><FaCaretDown/></button>
-            </div>
-            <p>{comment.body}</p>
-            <div className="comment-meta">
-              <span className="comment-author">{comment.author}</span> at&nbsp;
-              <span className="comment-timestamp">{comment.timestamp}</span>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <div className="comment-list">
+        <p>{comments.length} comments</p>
+
+        <ul>
+          {comments.sort((a, b) => a.voteScore < b.voteScore).map((comment) => (
+            <li className="comment" key={comment.id}>
+              <div className="comment-ranking">
+                <button onClick={() => this.voteComment(comment.id, 'upVote')}><FaCaretUp/></button>
+                <span className="comment-ranking-value">{comment.voteScore}</span>
+                <button onClick={() => this.voteComment(comment.id, 'downVote')}><FaCaretDown/></button>
+              </div>
+              <p>{comment.body}</p>
+              <div className="comment-meta">
+                <span className="comment-author">{comment.author}</span> at&nbsp;
+                <span className="comment-timestamp">{comment.timestamp}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     )
   }
 }

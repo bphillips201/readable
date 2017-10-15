@@ -5,6 +5,7 @@ import shortid from 'shortid';
 import { connect } from 'react-redux';
 import { addPost } from '../actions/post_actions';
 import serializeForm from 'form-serialize';
+import { withRouter } from 'react-router-dom'; 
 
 class AddPost extends React.Component {
   state = {
@@ -60,4 +61,4 @@ class AddPost extends React.Component {
   }
 }
 
-export default connect(null)(AddPost);
+export default withRouter(connect(null)(AddPost));

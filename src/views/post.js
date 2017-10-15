@@ -2,6 +2,7 @@ import React from 'react';
 import * as ReadableAPI from '../utils/ReadableAPI';
 import CommentList from '../components/comment_list';
 import AddComment from '../views/add_comment';
+import { connect } from 'react-redux';
 
 class Post extends React.Component {
   state = {
@@ -34,4 +35,11 @@ class Post extends React.Component {
   }
 }
 
-export default Post;
+// TODO: convert this into an array of posts
+function mapStateToProps ({ posts }) {
+  return {
+    posts
+  }
+}
+
+export default connect(mapStateToProps)(Post);

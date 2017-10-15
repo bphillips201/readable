@@ -23,6 +23,9 @@ class App extends Component {
       <div className="app">
         <header>
           <h1><Link to="/">Readable</Link></h1>
+          <div className="add-post-link">
+            <Link to="/add-post">Add New Post</Link>
+          </div>
         </header>
 
         <main className="container">
@@ -39,10 +42,6 @@ class App extends Component {
                 <PostList
                   posts={this.props.posts}
                 />
-              </div>
-
-              <div className="open-search">
-                <Link to="/add-post">Add New Post</Link>
               </div>
             </div>
           )}/>
