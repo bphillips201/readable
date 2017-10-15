@@ -4,16 +4,14 @@ import {
   ADD_POST,
   EDIT_POST,
   DELETE_POST,
-  VOTE_UP_POST,
-  VOTE_DOWN_POST
+  VOTE_POST
 } from '../actions/post_actions';
 import {
   GET_COMMENTS,
   ADD_COMMENT,
   EDIT_COMMENT,
   DELETE_COMMENT,
-  VOTE_UP_COMMENT,
-  VOTE_DOWN_COMMENT
+  VOTE_COMMENT
 } from '../actions/comment_actions';
 
 function posts (state = [], action) {
@@ -39,10 +37,13 @@ function posts (state = [], action) {
       return state;
     case DELETE_POST :
       return state;
-    case VOTE_UP_POST :
-      return state;
-    case VOTE_DOWN_POST :
-      return state;
+    case VOTE_POST :
+      return state.map(post => 
+        (post.id === action.post.id) ? {
+          ...post,
+          voteScore: action.post.voteScore
+        } : post
+      )
     default :
       return state;
   }
@@ -71,9 +72,7 @@ function comments (state = [], action) {
       return state;
     case DELETE_COMMENT :
       return state;
-    case VOTE_UP_COMMENT :
-      return state;
-    case VOTE_DOWN_COMMENT :
+    case VOTE_COMMENT :
       return state;
     default :
       return state;
