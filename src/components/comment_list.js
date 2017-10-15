@@ -30,7 +30,7 @@ class CommentList extends React.Component {
 
     return(
       <ul className="comment-list">
-        {comments.map((comment) => (
+        {comments.sort((a, b) => a.voteScore < b.voteScore).map((comment) => (
           <li className="comment" key={comment.id}>
             <div className="comment-ranking">
               <button onClick={() => this.voteComment(comment.id, 'upVote')}><FaCaretUp/></button>
