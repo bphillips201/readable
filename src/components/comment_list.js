@@ -2,7 +2,7 @@ import React from 'react';
 import FaCaretUp from 'react-icons/lib/fa/caret-up';
 import FaCaretDown from 'react-icons/lib/fa/caret-down';
 import * as ReadableAPI from '../utils/ReadableAPI';
-import { getComments, voteComment } from '../actions/comment_actions';
+import { getComments, voteComment, deleteComment } from '../actions/comment_actions';
 import { connect } from 'react-redux';
 
 class CommentList extends React.Component {
@@ -17,6 +17,12 @@ class CommentList extends React.Component {
         this.props.dispatch(voteComment({comment}));
       });
   }
+
+  deleteComment = (commentId) => {
+    ReadableAPI.deleteComment(commentId).then((data) => {
+      this.props.dispatch(deleteComment(data));
+    });
+  }
   
   componentDidMount() {
     ReadableAPI.getPostComments(this.props.postId).then((comments) => {
@@ -26,14 +32,16 @@ class CommentList extends React.Component {
 
   render() {
     const { comments } = this.props;
-    console.log(this.props);
 
     return(
       <div className="comment-list">
-        <p>{comments.length} comments</p>
+        <p>{comments.filter((comment) => comment.deleted !== true).length} comments</p>
 
         <ul>
-          {comments.sort((a, b) => a.voteScore < b.voteScore).map((comment) => (
+          {comments
+            .sort((a, b) => a.voteScore < b.voteScore)
+            .filter((comment) => comment.deleted !== true)
+            .map((comment) => (
             <li className="comment" key={comment.id}>
               <div className="comment-ranking">
                 <button onClick={() => this.voteComment(comment.id, 'upVote')}><FaCaretUp/></button>
@@ -44,6 +52,9 @@ class CommentList extends React.Component {
               <div className="comment-meta">
                 <span className="comment-author">{comment.author}</span> at&nbsp;
                 <span className="comment-timestamp">{comment.timestamp}</span>
+              </div>
+              <div className="comment-controls">
+                <button onClick={() => this.deleteComment(comment.id)}>Delete Comment</button>
               </div>
             </li>
           ))}

@@ -20,7 +20,10 @@ class PostList extends React.Component {
   render() {
     return(
       <ul className="post-list">
-        {this.props.posts.sort((a, b) => a.voteScore < b.voteScore).map((post) => (
+        {this.props.posts
+          .sort((a, b) => a.voteScore < b.voteScore)
+          .filter((post) => post.deleted !== true)
+          .map((post) => (
           <li key={post.id} className="post">
             <div className="post-ranking">
               <button onClick={() => this.votePost(post.id, 'upVote')}><FaCaretUp/></button>

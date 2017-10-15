@@ -51,8 +51,8 @@ export const updatePost = (post, body, title) =>
     })
   }).then(res => res.json())
 
-export const deletePost = (post) =>
-  fetch(`${api}/posts/${post.id}`, {
+export const deletePost = (postId) =>
+  fetch(`${api}/posts/${postId}`, {
     method: 'DELETE',
     headers: {
       ...headers,
@@ -115,4 +115,13 @@ export const voteComment = (commentId, option) =>
     body: JSON.stringify({
       option
     })
+  }).then(res => res.json())
+
+export const deleteComment = (commentId) =>
+  fetch(`${api}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }
   }).then(res => res.json())

@@ -24,3 +24,10 @@ export function voteComment ({ comment }) {
     comment
   }
 }
+
+export function deleteComment ( comment ) {
+  return {
+    type: DELETE_COMMENT,
+    comment
+  }
+}

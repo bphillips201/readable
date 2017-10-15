@@ -24,3 +24,10 @@ export function votePost ({ post }) {
     post
   }
 }
+
+export function deletePost ( post ) {
+  return {
+    type: DELETE_POST,
+    post
+  }
+}

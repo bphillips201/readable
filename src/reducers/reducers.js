@@ -36,7 +36,12 @@ function posts (state = [], action) {
     case EDIT_POST :
       return state;
     case DELETE_POST :
-      return state;
+      return state.map(post => 
+        (post.id === action.post.id) ? {
+          ...post,
+          deleted: action.post.deleted
+        } : post
+      )
     case VOTE_POST :
       return state.map(post => 
         (post.id === action.post.id) ? {
@@ -71,7 +76,12 @@ function comments (state = [], action) {
     case EDIT_COMMENT :
       return state;
     case DELETE_COMMENT :
-      return state;
+      return state.map(comment => 
+        (comment.id === action.comment.id) ? {
+          ...comment,
+          deleted: action.comment.deleted
+        } : comment
+      )
     case VOTE_COMMENT :
       return state.map(comment => 
         (comment.id === action.comment.id) ? {
