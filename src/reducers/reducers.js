@@ -73,7 +73,12 @@ function comments (state = [], action) {
     case DELETE_COMMENT :
       return state;
     case VOTE_COMMENT :
-      return state;
+      return state.map(comment => 
+        (comment.id === action.comment.id) ? {
+          ...comment,
+          voteScore: action.comment.voteScore
+        } : comment
+      )
     default :
       return state;
   }

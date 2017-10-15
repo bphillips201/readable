@@ -2,12 +2,20 @@ import React from 'react';
 import FaCaretUp from 'react-icons/lib/fa/caret-up';
 import FaCaretDown from 'react-icons/lib/fa/caret-down';
 import * as ReadableAPI from '../utils/ReadableAPI';
-import { getComments } from '../actions/comment_actions';
+import { getComments, voteComment } from '../actions/comment_actions';
 import { connect } from 'react-redux';
 
 class CommentList extends React.Component {
   state = {
     comments: []
+  }
+
+  voteComment = (commentId, option) => {
+    ReadableAPI
+      .voteComment(commentId, option)
+      .then((comment) => {
+        this.props.dispatch(voteComment({comment}));
+      });
   }
   
   componentDidMount() {
@@ -25,9 +33,9 @@ class CommentList extends React.Component {
         {comments.map((comment) => (
           <li className="comment" key={comment.id}>
             <div className="comment-ranking">
-              <button><FaCaretUp/></button>
+              <button onClick={() => this.voteComment(comment.id, 'upVote')}><FaCaretUp/></button>
               <span className="comment-ranking-value">{comment.voteScore}</span>
-              <button><FaCaretDown/></button>
+              <button onClick={() => this.voteComment(comment.id, 'downVote')}><FaCaretDown/></button>
             </div>
             <p>{comment.body}</p>
             <div className="comment-meta">

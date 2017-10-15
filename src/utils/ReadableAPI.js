@@ -104,3 +104,15 @@ export const addComment = (id, timestamp, body, author, parentId) =>
       parentId: parentId
     })
   }).then(res => res.json())
+
+export const voteComment = (commentId, option) =>
+  fetch(`${api}/comments/${commentId}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      option
+    })
+  }).then(res => res.json())

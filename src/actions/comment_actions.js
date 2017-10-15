@@ -17,3 +17,10 @@ export function addComment ({ data }) {
     data
   }
 }
+
+export function voteComment ({ comment }) {
+  return {
+    type: VOTE_COMMENT,
+    comment
+  }
+}
