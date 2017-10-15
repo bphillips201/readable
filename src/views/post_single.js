@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { deletePost } from '../actions/post_actions';
 
-class Post extends React.Component {
+class PostSingle extends React.Component {
   state = {
     post: {}
   }
@@ -27,7 +27,7 @@ class Post extends React.Component {
     const { post } = this.state;
 
     return (
-      <div className="post">
+      <div className="post-single">
         <h1>{post.title}</h1>
         <div className="post-meta">
           <span className="post-author">{post.author}</span> · 
@@ -55,4 +55,4 @@ function mapStateToProps ({ posts }) {
   }
 }
 
-export default connect(mapStateToProps)(Post);
+export default connect(mapStateToProps)(PostSingle);

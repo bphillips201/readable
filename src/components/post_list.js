@@ -1,3 +1,4 @@
+import '../styles/posts.css';
 import React from 'react';
 import * as ReadableAPI from '../utils/ReadableAPI';
 import FaCaretUp from 'react-icons/lib/fa/caret-up';
@@ -26,14 +27,16 @@ class PostList extends React.Component {
           .map((post) => (
           <li key={post.id} className="post">
             <div className="post-ranking">
-              <button onClick={() => this.votePost(post.id, 'upVote')}><FaCaretUp/></button>
-              <span className="post-ranking-value">{post.voteScore}</span>
-              <button onClick={() => this.votePost(post.id, 'downVote')}><FaCaretDown/></button>
+              <button className="ranking-button" onClick={() => this.votePost(post.id, 'upVote')}><FaCaretUp/></button>
+              <div className="post-ranking-value">{post.voteScore}</div>
+              <button className="ranking-button" onClick={() => this.votePost(post.id, 'downVote')}><FaCaretDown/></button>
             </div>
-            <h4><Link to={`/${post.category}`}>{capitalize(post.category)}</Link></h4>
-            <h3><Link to={`/${post.category}/${post.id}`}>{post.title}</Link></h3>
-            <div className="post-meta">
-              <span className="post-author">{post.author}</span>
+            <div className="post-content">
+              <h4><Link to={`/${post.category}`}>{capitalize(post.category)}</Link></h4>
+              <h3><Link to={`/${post.category}/${post.id}`}>{post.title}</Link></h3>
+              <div className="post-meta">
+                <span className="post-author">by {post.author}</span>
+              </div>
             </div>
           </li>
         ))}

@@ -1,0 +1,59 @@
+.post-list {
+  list-style-type: none;
+}
+.post-list li {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #DDD;
+  padding: 32px 0;
+}
+.post-list li:first-child {
+  padding-top: 0;
+}
+
+.post-ranking {
+  text-align: center;
+  color: #777;
+  margin-right: 32px;
+}
+
+.post-ranking-value {
+  padding-top: 6px;
+}
+
+.ranking-button {
+  display: inline-block;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 0;
+  outline: none;
+  color: #777;
+}
+.ranking-button:hover {
+  color: #333;
+}
+
+.post h4 {
+  margin: 0;
+}
+.post h4 a {
+  text-decoration: none;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.post h4 a:hover {
+  text-decoration: underline;
+}
+.post h3 {
+  font-size: 32px;
+  margin: 16px 0;
+}
+.post h3 a {
+  color: #333;
+  text-decoration: none;
+}
+.post h3 a:hover {
+  text-decoration: underline;
+}
