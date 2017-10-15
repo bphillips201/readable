@@ -21,8 +21,8 @@ class AddComment extends React.Component {
 
     ReadableAPI
       .addComment(id, timestamp, body, author, parentId)
-      .then((data) => {
-        this.props.dispatch(addComment({data}));
+      .then((comment) => {
+        this.props.dispatch(addComment({comment}));
       });
   }
 

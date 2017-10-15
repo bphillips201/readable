@@ -11,10 +11,10 @@ export function getPosts ({ posts }) {
   }
 }
 
-export function addPost ({ data }) {
+export function addPost ({ post }) {
   return {
     type: ADD_POST,
-    data
+    post
   }
 }
 

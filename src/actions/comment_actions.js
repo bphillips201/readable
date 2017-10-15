@@ -11,10 +11,10 @@ export function getComments ({ comments }) {
   }
 }
 
-export function addComment ({ data }) {
+export function addComment ({ comment }) {
   return {
     type: ADD_COMMENT,
-    data
+    comment
   }
 }
 

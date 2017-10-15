@@ -19,18 +19,18 @@ function posts (state = [], action) {
     case GET_POSTS :
       return action.posts;
     case ADD_POST :
-      const { data } = action;
+      const { post } = action;
       return [
         ...state,
         {
-          id: data.id,
-          timestamp: data.timestamp,
-          title: data.title,
-          author: data.author,
-          body: data.body,
-          category: data.category,
-          voteScore: data.voteScore,
-          deleted: data.deleted
+          id: post.id,
+          timestamp: post.timestamp,
+          title: post.title,
+          author: post.author,
+          body: post.body,
+          category: post.category,
+          voteScore: post.voteScore,
+          deleted: post.deleted
         }
       ]
     case EDIT_POST :
@@ -54,18 +54,18 @@ function comments (state = [], action) {
     case GET_COMMENTS :
       return action.comments;
     case ADD_COMMENT :
-      const { data } = action;
+      const { comment } = action;
       return [
         ...state,
         {
-          id: data.id,
-          parentId: data.parentId,
-          timestamp: data.timestamp,
-          author: data.author,
-          body: data.body,
-          voteScore: data.voteScore,
-          deleted: data.deleted,
-          parentDeleted: data.parentDeleted
+          id: comment.id,
+          parentId: comment.parentId,
+          timestamp: comment.timestamp,
+          author: comment.author,
+          body: comment.body,
+          voteScore: comment.voteScore,
+          deleted: comment.deleted,
+          parentDeleted: comment.parentDeleted
         }
       ]
     case EDIT_COMMENT :

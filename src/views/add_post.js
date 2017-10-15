@@ -20,8 +20,8 @@ class AddPost extends React.Component {
 
     ReadableAPI
       .addPost(id, timestamp, title, body, author, category)
-      .then((data) => {
-        this.props.dispatch(addPost({data}));
+      .then((post) => {
+        this.props.dispatch(addPost({post}));
       });
   }
 
