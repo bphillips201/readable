@@ -2,7 +2,7 @@
 
 This is the second assessment project for Udacity's React Developer course, developed by React Training.
 
-Installation
+## Installation
 
 ```
 npm install
