@@ -53,14 +53,11 @@ class PostSingle extends React.Component {
               {isEditing === true
                 ? <form onSubmit={this.updatePost}>
                     <h1><input type="text" name="title" defaultValue={post.title} /></h1>
-
                     <div className="post-meta">
                       <span className="post-author">{post.author}</span> · 
                       <span className="post-timestamp">{post.timestamp}</span>
                     </div>
-                    
                     <p><textarea name="body" defaultValue={post.body} /></p>
-
                     <div className="post-controls">
                       <button>Update Post</button>
                       <button onClick={() => this.cancelEdit()}>Cancel</button>

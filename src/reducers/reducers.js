@@ -80,7 +80,13 @@ function comments (state = [], action) {
         }
       ]
     case EDIT_COMMENT :
-      return state;
+      return state.map(comment => 
+        (comment.id === action.id) ? {
+          ...comment,
+          timestamp: action.timestamp,
+          body: action.body
+        } : comment
+      )
     case DELETE_COMMENT :
       return state.map(comment => 
         (comment.id === action.comment.id) ? {

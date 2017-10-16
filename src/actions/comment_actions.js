@@ -25,6 +25,15 @@ export function voteComment ({ comment }) {
   }
 }
 
+export function editComment (id, timestamp, body) {
+  return {
+    type: EDIT_COMMENT,
+    id,
+    timestamp,
+    body
+  }
+}
+
 export function deleteComment ( comment ) {
   return {
     type: DELETE_COMMENT,
