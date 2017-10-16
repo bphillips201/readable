@@ -34,7 +34,13 @@ function posts (state = [], action) {
         }
       ]
     case EDIT_POST :
-      return state;
+      return state.map(post => 
+        (post.id === action.id) ? {
+          ...post,
+          title: action.title,
+          body: action.body
+        } : post
+      )
     case DELETE_POST :
       return state.map(post => 
         (post.id === action.post.id) ? {

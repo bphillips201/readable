@@ -35,12 +35,12 @@ class CommentList extends React.Component {
 
     return(
       <div className="comment-list">
-        <p>{comments.filter((comment) => comment.deleted !== true).length} comments</p>
+        <p>{comments.filter((comment) => comment.deleted !== true && comment.parentDeleted !== true).length} comments</p>
 
         <ul>
           {comments
             .sort((a, b) => a.voteScore < b.voteScore)
-            .filter((comment) => comment.deleted !== true)
+            .filter((comment) => comment.deleted !== true && comment.parentDeleted !== true)
             .map((comment) => (
             <li className="comment" key={comment.id}>
               <div className="comment-ranking">

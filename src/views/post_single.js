@@ -2,13 +2,14 @@ import React from 'react';
 import * as ReadableAPI from '../utils/ReadableAPI';
 import CommentList from '../components/comment_list';
 import AddComment from '../views/add_comment';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { deletePost } from '../actions/post_actions';
+import { deletePost, editPost } from '../actions/post_actions';
+import serializeForm from 'form-serialize';
 
 class PostSingle extends React.Component {
   state = {
-    post: {}
+    post: {},
+    isEditing: false
   }
 
   componentDidMount() {
@@ -18,33 +19,71 @@ class PostSingle extends React.Component {
   }
 
   deletePost = (postId) => {
-    ReadableAPI.deletePost(postId).then((data) => {
-      this.props.dispatch(deletePost(data));
+    ReadableAPI.deletePost(postId).then((post) => {
+      this.props.dispatch(deletePost(post));
+      this.setState({ post })
+    });
+  }
+
+  enableEdit = () => { this.setState({ isEditing: true }) }
+  cancelEdit = () => { this.setState({ isEditing: false }) }
+
+  updatePost = (e) => {
+    e.preventDefault();
+    const values = serializeForm(e.target, { hash: true });
+    const { post } = this.state;
+
+    ReadableAPI.updatePost(post.id, values.title, values.body).then((data) => {
+      this.props.dispatch(editPost(data.id, data.title, data.body));
+      this.setState({ 
+        post: data,
+        isEditing: false
+      });
     });
   }
   
   render() {
-    const { post } = this.state;
+    const { post, isEditing } = this.state;
 
     return (
       <div className="post-single">
-        <h1>{post.title}</h1>
-        <div className="post-meta">
-          <span className="post-author">{post.author}</span> · 
-          <span className="post-timestamp">{post.timestamp}</span>
-        </div>
-        
-        <p>{post.body}</p>
+        {post.deleted === true
+          ? <h2>Sorry, this post has been deleted</h2>
+          : <div>
+              {isEditing === true
+                ? <form onSubmit={this.updatePost}>
+                    <h1><input type="text" name="title" defaultValue={post.title} /></h1>
 
-        <div className="post-controls">
-          <Link to={`/${post.category}/${post.id}/edit`}>Edit Post</Link>
-          <button onClick={() => this.deletePost(post.id)}>Delete Post</button>
-        </div>
+                    <div className="post-meta">
+                      <span className="post-author">{post.author}</span> · 
+                      <span className="post-timestamp">{post.timestamp}</span>
+                    </div>
+                    
+                    <p><textarea name="body" defaultValue={post.body} /></p>
 
-        <AddComment postId={this.props.match.params.id}/>
-        <CommentList postId={this.props.match.params.id}/>
-      </div>
-    )
+                    <div className="post-controls">
+                      <button>Update Post</button>
+                      <button onClick={() => this.cancelEdit()}>Cancel</button>
+                      <button onClick={() => this.deletePost(post.id)}>Delete Post</button>
+                    </div>
+                  </form>
+                : <div>
+                    <h1>{post.title}</h1>
+                    <div className="post-meta">
+                      <span className="post-author">{post.author}</span> · 
+                      <span className="post-timestamp">{post.timestamp}</span>
+                    </div>
+                    <p>{post.body}</p>
+                    <div className="post-controls">
+                      <button onClick={() => this.enableEdit()}>Edit Post</button>
+                      <button onClick={() => this.deletePost(post.id)}>Delete Post</button>
+                    </div>
+                </div>}
+              <AddComment postId={this.props.match.params.id}/>
+              <CommentList postId={this.props.match.params.id}/>
+            </div>}
+        </div>
+      )
   }
 }
 

@@ -18,6 +18,15 @@ export function addPost ({ post }) {
   }
 }
 
+export function editPost (id, title, body) {
+  return {
+    type: EDIT_POST,
+    id,
+    title,
+    body
+  }
+}
+
 export function votePost ({ post }) {
   return {
     type: VOTE_POST,
