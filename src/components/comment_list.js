@@ -1,3 +1,4 @@
+import '../styles/comments.css';
 import React from 'react';
 import * as ReadableAPI from '../utils/ReadableAPI';
 import { getComments } from '../actions/comment_actions';

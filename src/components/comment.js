@@ -47,9 +47,9 @@ class Comment extends React.Component {
     return (
       <li className="comment">
         <div className="comment-ranking">
-          <button onClick={() => this.voteComment(comment.id, 'upVote')}><FaCaretUp/></button>
-          <span className="comment-ranking-value">{comment.voteScore}</span>
-          <button onClick={() => this.voteComment(comment.id, 'downVote')}><FaCaretDown/></button>
+          <button className="ranking-button" onClick={() => this.voteComment(comment.id, 'upVote')}><FaCaretUp/></button>
+          <div className="comment-ranking-value">{comment.voteScore}</div>
+          <button className="ranking-button" onClick={() => this.voteComment(comment.id, 'downVote')}><FaCaretDown/></button>
         </div>
         {isEditing === true
           ? <form onSubmit={this.updateComment}>

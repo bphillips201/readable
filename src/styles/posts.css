@@ -57,3 +57,24 @@
 .post h3 a:hover {
   text-decoration: underline;
 }
+
+.post-single {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.post-single h1 {
+  font-size: 36px;
+}
+.post-single .post-meta {
+  margin-bottom: 48px;
+}
+
+.post-body {
+  margin-bottom: 36px;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.post-controls {
+  margin-bottom: 48px;
+}

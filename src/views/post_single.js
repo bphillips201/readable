@@ -47,7 +47,7 @@ class PostSingle extends React.Component {
 
     return (
       <div className="post-single">
-        {post.deleted === true
+        {post.deleted === true || Object.keys(post).length === 0
           ? <h2>Sorry, this post has been deleted</h2>
           : <div>
               {isEditing === true
@@ -57,7 +57,7 @@ class PostSingle extends React.Component {
                       <span className="post-author">{post.author}</span> · 
                       <span className="post-timestamp">{post.timestamp}</span>
                     </div>
-                    <p><textarea name="body" defaultValue={post.body} /></p>
+                    <p className="post-body"><textarea name="body" defaultValue={post.body} /></p>
                     <div className="post-controls">
                       <button>Update Post</button>
                       <button onClick={() => this.cancelEdit()}>Cancel</button>
@@ -70,7 +70,7 @@ class PostSingle extends React.Component {
                       <span className="post-author">{post.author}</span> · 
                       <span className="post-timestamp">{post.timestamp}</span>
                     </div>
-                    <p>{post.body}</p>
+                    <p className="post-body">{post.body}</p>
                     <div className="post-controls">
                       <button onClick={() => this.enableEdit()}>Edit Post</button>
                       <button onClick={() => this.deletePost(post.id)}>Delete Post</button>
