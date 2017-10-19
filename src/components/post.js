@@ -3,6 +3,7 @@ import * as ReadableAPI from '../utils/ReadableAPI';
 import { Link } from 'react-router-dom';
 import { votePost } from '../actions/post_actions';
 import { capitalize } from '../utils/helpers';
+import { connect } from 'react-redux';
 import FaCaretUp from 'react-icons/lib/fa/caret-up';
 import FaCaretDown from 'react-icons/lib/fa/caret-down';
 
@@ -50,4 +51,4 @@ class Post extends Component {
   }
 }
 
-export default Post;
+export default connect(null)(Post);
