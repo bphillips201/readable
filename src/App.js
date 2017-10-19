@@ -51,4 +51,11 @@ class App extends Component {
   }
 }
 
-export default withRouter(connect(null)(App));
+
+function mapStateToProps ({ posts }) {
+  return {
+    posts
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(App));

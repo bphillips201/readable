@@ -20,10 +20,4 @@ class PostList extends React.Component {
   }
 }
 
-function mapStateToProps ({ posts }) {
-  return {
-    posts
-  }
-}
-
-export default connect(mapStateToProps)(PostList);
+export default connect(null)(PostList);
