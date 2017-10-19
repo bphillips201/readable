@@ -5,11 +5,14 @@ import shortid from 'shortid';
 import { connect } from 'react-redux';
 import { addPost } from '../actions/post_actions';
 import serializeForm from 'form-serialize';
-import { withRouter } from 'react-router-dom'; 
+import { withRouter, Redirect } from 'react-router-dom'; 
 
 class AddPost extends React.Component {
   state = {
-    categories: []
+    categories: [],
+    fireRedirect: false,
+    postId: null,
+    postCategory: null
   }
 
   submitPost = (e) => {
@@ -23,6 +26,11 @@ class AddPost extends React.Component {
       .addPost(id, timestamp, title, body, author, category)
       .then((post) => {
         this.props.dispatch(addPost({post}));
+        this.setState({ 
+          fireRedirect: true,
+          postId: post.id,
+          postCategory: post.category
+        })
       });
   }
 
@@ -33,6 +41,8 @@ class AddPost extends React.Component {
   }
 
   render() {
+    const { postId, postCategory } = this.state;
+
     return (
       <div className="add-post">
         <form onSubmit={this.submitPost}>
@@ -56,9 +66,14 @@ class AddPost extends React.Component {
 
           <button className="btn">Add Post</button>
         </form>
+        {this.state.fireRedirect && (
+          <Redirect to={`/${postCategory}/${postId}`}/>
+        )}
       </div>
     )
   }
 }
+
+
 
 export default withRouter(connect(null)(AddPost));

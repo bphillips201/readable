@@ -1,6 +1,6 @@
 import './styles/app.css';
 import React, { Component } from 'react';
-import { withRouter, Route, Link } from 'react-router-dom';
+import { withRouter, Route, Link, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as ReadableAPI from './utils/ReadableAPI';
 import PostList from './components/post_list';
@@ -29,22 +29,24 @@ class App extends Component {
         </header>
 
         <main className="container">
-          <Route path="/:category/:id" component={PostSingle}/>
-          <Route exact path="/:category" component={Category}/>
-          <Route path="/add-post" component={AddPost}/>
-          <Route exact path="/" render={() => (
-            <div className="content">
-              <aside className="categories">
-                <CategoryList/>
-              </aside>
-              
-              <div className="posts">
-                <PostList
-                  posts={this.props.posts}
-                />
+          <Switch>
+            <Route exact path="/" render={() => (
+              <div className="content">
+                <aside className="categories">
+                  <CategoryList/>
+                </aside>
+                
+                <div className="posts">
+                  <PostList
+                    posts={this.props.posts}
+                  />
+                </div>
               </div>
-            </div>
-          )}/>
+            )}/>
+            <Route path="/add-post" component={AddPost}/>
+            <Route path="/:category/:id" component={PostSingle}/>
+            <Route path="/:category" component={Category}/>
+          </Switch>
         </main>
       </div>
     );
