@@ -24,7 +24,7 @@ class App extends Component {
         <header>
           <h1><Link to="/">Readable</Link></h1>
           <div className="add-post-link">
-            <Link to="/add-post">Add New Post</Link>
+            <Link to="/add-post" className="btn">Add New Post</Link>
           </div>
         </header>
 

@@ -35,13 +35,15 @@ class AddComment extends React.Component {
         <form onSubmit={this.submitComment}>
           <h3>Add a New Comment</h3>
 
-          <label htmlFor="add-comment-author">Name</label><br/>
-          <input name="author" id="add-comment-author" type="text"/><br/>
+          <label htmlFor="add-comment-author">Name</label>
+          <input name="author" id="add-comment-author" type="text"/>
 
-          <label htmlFor="add-comment-body">Comment</label><br/>
-          <textarea name="body" id="add-comment-body"/><br/>
+          <label htmlFor="add-comment-body">Comment</label>
+          <textarea name="body" id="add-comment-body"/>
 
-          <button>Add Comment</button>
+          <div className="form-actions">
+            <button className="btn">Add Comment</button>
+          </div>
         </form>
       </div>
     )

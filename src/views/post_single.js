@@ -1,3 +1,4 @@
+import '../styles/forms.css';
 import React from 'react';
 import * as ReadableAPI from '../utils/ReadableAPI';
 import CommentList from '../components/comment_list';
@@ -52,32 +53,32 @@ class PostSingle extends React.Component {
           : <div>
               {isEditing === true
                 ? <form onSubmit={this.updatePost}>
-                    <h1><input type="text" name="title" defaultValue={post.title} /></h1>
+                    <h1><input type="text" name="title" className="inline-input" defaultValue={post.title} /></h1>
                     <div className="post-meta">
-                      <span className="post-author">{post.author}</span> · 
-                      <span className="post-timestamp">{post.timestamp}</span>
+                      <span className="post-author">by {post.author}</span>
                     </div>
-                    <p className="post-body"><textarea name="body" defaultValue={post.body} /></p>
+                    <p className="post-body"><textarea name="body" className="inline-input" defaultValue={post.body} /></p>
                     <div className="post-controls">
-                      <button>Update Post</button>
-                      <button onClick={() => this.cancelEdit()}>Cancel</button>
-                      <button onClick={() => this.deletePost(post.id)}>Delete Post</button>
+                      <button className="btn push-right">Update Post</button>
+                      <button className="btn-link" onClick={() => this.cancelEdit()}>Cancel</button>
+                      <button className="btn-link red" onClick={() => this.deletePost(post.id)}>Delete Post</button>
                     </div>
                   </form>
                 : <div>
                     <h1>{post.title}</h1>
                     <div className="post-meta">
-                      <span className="post-author">{post.author}</span> · 
-                      <span className="post-timestamp">{post.timestamp}</span>
+                      <span className="post-author">by {post.author}</span>
                     </div>
                     <p className="post-body">{post.body}</p>
                     <div className="post-controls">
-                      <button onClick={() => this.enableEdit()}>Edit Post</button>
-                      <button onClick={() => this.deletePost(post.id)}>Delete Post</button>
+                      <button className="btn-link" onClick={() => this.enableEdit()}>Edit Post</button>
+                      <button className="btn-link red" onClick={() => this.deletePost(post.id)}>Delete Post</button>
                     </div>
                 </div>}
-              <AddComment postId={this.props.match.params.id}/>
-              <CommentList postId={this.props.match.params.id}/>
+              <div className="comments">
+                <AddComment postId={this.props.match.params.id}/>
+                <CommentList postId={this.props.match.params.id}/>
+              </div>
             </div>}
         </div>
       )

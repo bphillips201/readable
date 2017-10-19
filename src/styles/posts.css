@@ -58,15 +58,18 @@
   text-decoration: underline;
 }
 
-.post-single {
+.post-single,
+.add-post {
   max-width: 800px;
   margin: 0 auto;
 }
 .post-single h1 {
   font-size: 36px;
+  margin-bottom: 24px;
 }
 .post-single .post-meta {
   margin-bottom: 48px;
+  color: #777;
 }
 
 .post-body {

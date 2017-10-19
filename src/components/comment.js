@@ -53,26 +53,24 @@ class Comment extends React.Component {
         </div>
         {isEditing === true
           ? <form onSubmit={this.updateComment}>
-              <p><textarea name="body" defaultValue={comment.body}/></p>
+              <p><textarea name="body" className="inline-input" defaultValue={comment.body}/></p>
               <div className="comment-meta">
-                <span className="comment-author">{comment.author}</span> at&nbsp;
-                <span className="comment-timestamp">{comment.timestamp}</span>
+                <span className="comment-author">by {comment.author}</span>
               </div>
               <div className="comment-controls">
-                <button>Update Comment</button>
-                <button onClick={() => this.cancelEdit()}>Cancel</button>
-                <button onClick={() => this.deleteComment(comment.id)}>Delete Comment</button>
+                <button className="btn push-right">Update Comment</button>
+                <button className="btn-link" onClick={() => this.cancelEdit()}>Cancel</button>
+                <button className="btn-link red" onClick={() => this.deleteComment(comment.id)}>Delete Comment</button>
               </div>
             </form>
           : <div>
               <p>{comment.body}</p>
               <div className="comment-meta">
-                <span className="comment-author">{comment.author}</span> at&nbsp;
-                <span className="comment-timestamp">{comment.timestamp}</span>
+                <span className="comment-author">by {comment.author}</span>
               </div>
               <div className="comment-controls">
-                <button onClick={() => this.enableEdit()}>Edit Comment</button>
-                <button onClick={() => this.deleteComment(comment.id)}>Delete Comment</button>
+                <button className="btn-link" onClick={() => this.enableEdit()}>Edit Comment</button>
+                <button className="btn-link red" onClick={() => this.deleteComment(comment.id)}>Delete Comment</button>
               </div>
             </div>
         }

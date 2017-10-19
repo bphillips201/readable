@@ -38,23 +38,23 @@ class AddPost extends React.Component {
         <form onSubmit={this.submitPost}>
           <h3>Add a New Post</h3>
 
-          <label htmlFor="add-post-title">Title</label><br/>
-          <input name="title" id="add-post-title" type="text"/><br/>
+          <label htmlFor="add-post-title">Title</label>
+          <input name="title" id="add-post-title" type="text"/>
 
-          <label htmlFor="add-post-author">Author</label><br/>
-          <input name="author" id="add-post-author" type="text"/><br/>
+          <label htmlFor="add-post-author">Author</label>
+          <input name="author" id="add-post-author" type="text"/>
 
-          <label htmlFor="add-post-category">Category</label><br/>
+          <label htmlFor="add-post-category">Category</label>
           <select name="category" id="add-post-category">
             {this.state.categories.map((cat) => (
               <option value={cat.name} key={cat.name}>{capitalize(cat.name)}</option>
             ))}
-          </select><br/>
+          </select>
 
-          <label htmlFor="add-post-body">Body</label><br/>
-          <textarea name="body" id="add-post-body"/><br/>
+          <label htmlFor="add-post-body">Body</label>
+          <textarea name="body" id="add-post-body"/>
 
-          <button>Add Post</button>
+          <button className="btn">Add Post</button>
         </form>
       </div>
     )
