@@ -37,7 +37,6 @@ class CommentList extends React.Component {
   }
 }
 
-// TODO: convert this into an array of posts
 function mapStateToProps ({ comments }) {
   return {
     comments

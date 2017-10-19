@@ -51,13 +51,4 @@ class App extends Component {
   }
 }
 
-// TODO: convert this into an array of posts
-function mapStateToProps ({ posts }) {
-  return {
-    posts
-  }
-}
-
-export default withRouter(connect(
-  mapStateToProps
-)(App));
+export default withRouter(connect(null)(App));
