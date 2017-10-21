@@ -1,4 +1,4 @@
-import './styles/app.css';
+import './styles/App.css';
 import React, { Component } from 'react';
 import { withRouter, Route, Link, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
