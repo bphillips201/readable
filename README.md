@@ -11,5 +11,5 @@ npm install
 To run local development server at http://localhost:3000:
 
 ```
-npm start
+yarn start
 ```
