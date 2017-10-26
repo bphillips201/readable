@@ -2,8 +2,6 @@ import '../styles/posts.css';
 import React from 'react';
 import Post from './post';
 
-import { connect } from 'react-redux';
-
 class PostList extends React.Component {
 
   state = {
@@ -38,4 +36,4 @@ class PostList extends React.Component {
   }
 }
 
-export default connect(null)(PostList);
+export default PostList;

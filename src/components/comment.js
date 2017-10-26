@@ -3,7 +3,7 @@ import FaCaretUp from 'react-icons/lib/fa/caret-up';
 import FaCaretDown from 'react-icons/lib/fa/caret-down';
 import * as ReadableAPI from '../utils/ReadableAPI';
 import { connect } from 'react-redux';
-import { voteComment, deleteComment, editComment } from '../actions/comment_actions';
+import * as actions from '../actions/comment_actions';
 import serializeForm from 'form-serialize';
 
 class Comment extends React.Component {
@@ -15,7 +15,7 @@ class Comment extends React.Component {
     ReadableAPI
       .voteComment(commentId, option)
       .then((comment) => {
-        this.props.dispatch(voteComment({comment}));
+        this.props.dispatch(actions.voteComment({comment}));
       });
   }
 
@@ -29,14 +29,14 @@ class Comment extends React.Component {
     const timestamp = Date.now();
 
     ReadableAPI.updateComment(comment.id, timestamp, values.body).then((data) => {
-      this.props.dispatch(editComment(data.id, data.timestamp, data.body));
+      this.props.dispatch(actions.editComment(data.id, data.timestamp, data.body));
       this.setState({ isEditing: false });
     });
   }
 
   deleteComment = (commentId) => {
     ReadableAPI.deleteComment(commentId).then((data) => {
-      this.props.dispatch(deleteComment(data));
+      this.props.dispatch(actions.deleteComment(data));
     });
   }
 
