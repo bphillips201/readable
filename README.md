@@ -4,12 +4,16 @@ This is the second assessment project for Udacity's React Developer course, deve
 
 ## Installation
 
+Install and run React + Redux app (http://localhost:3001):
 ```
+cd frontend
 npm install
-```
-
-To run local development server at http://localhost:3000:
-
-```
 yarn start
+```
+
+Install and run API Server:
+```
+cd frontend
+npm install
+node server
 ```
