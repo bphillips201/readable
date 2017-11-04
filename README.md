@@ -11,7 +11,7 @@ npm install
 yarn start
 ```
 
-Install and run API Server:
+Install and run API Server (http://localhost:3001):
 ```
 cd frontend
 npm install
