@@ -13,7 +13,7 @@ yarn start
 
 Install and run API Server (http://localhost:3001):
 ```
-cd frontend
+cd api-server
 npm install
 node server
 ```
