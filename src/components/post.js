@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as ReadableAPI from '../utils/ReadableAPI';
 import { Link } from 'react-router-dom';
-import { votePost } from '../actions/post_actions';
+import { votePost, deletePost } from '../actions/post_actions';
 import { capitalize } from '../utils/helpers';
 import { connect } from 'react-redux';
 import FaCaretUp from 'react-icons/lib/fa/caret-up';
@@ -18,6 +18,13 @@ class Post extends Component {
       .then((post) => {
         this.props.dispatch(votePost({post}));
       });
+  }
+
+  deletePost = (postId) => {
+    ReadableAPI.deletePost(postId).then((post) => {
+      this.props.dispatch(deletePost(post));
+      this.setState({ post })
+    });
   }
 
   componentDidMount() {
@@ -45,6 +52,8 @@ class Post extends Component {
           <div className="post-meta">
             <span className="post-author">by {post.author}</span> • <span className="comment-count">{commentCount} comments</span>
           </div>
+          <Link className="btn-link" to={`/${post.category}/${post.id}/edit`}>Edit Post</Link>
+          <button className="btn-link red" onClick={() => this.deletePost(post.id)}>Delete Post</button>
         </div>
       </li>
     );

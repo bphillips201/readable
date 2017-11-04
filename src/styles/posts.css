@@ -10,6 +10,9 @@
 .post-list li:first-child {
   padding-top: 0;
 }
+.post-list .post-meta {
+  margin-bottom: 16px;
+}
 
 .post-ranking {
   text-align: center;
