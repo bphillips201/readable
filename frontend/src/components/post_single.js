@@ -9,8 +9,7 @@ import { Link } from 'react-router-dom';
 
 class PostSingle extends React.Component {
   state = {
-    post: {},
-    isEditing: false
+    post: {}
   }
 
   componentDidMount() {
@@ -27,7 +26,7 @@ class PostSingle extends React.Component {
   }
   
   render() {
-    const { post, isEditing } = this.state;
+    const { post } = this.state;
 
     return (
       <div className="post-single">
