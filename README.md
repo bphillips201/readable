@@ -4,7 +4,7 @@ This is the second assessment project for Udacity's React Developer course, deve
 
 ## Installation
 
-Install and run React + Redux app (http://localhost:3001):
+Install and run React + Redux app (http://localhost:3000):
 ```
 cd frontend
 npm install
